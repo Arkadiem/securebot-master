@@ -1,0 +1,72 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+    <h2 class="text-center">Empresas</h2>
+  </div>
+  <div class="col-4 d-grid gap-2 d-md-flex  justify-content-md-end">
+    <button type="button" (click)="verSolicitudes()" class="btn btn-light position-relative" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .95rem;display: flex; flex-direction: column; justify-content: center;"> 
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-building " style="margin-left: 20px;" viewBox="0 0 16 16">
+        <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+        <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
+      </svg>Solicitudes
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="count > 0">
+        {{ count }}
+      </span>
+      <span class="sinsolicitudes" *ngIf="count == 0"></span>
+    </button>
+  </div>
+  <div class="mb-3 row">
+		<label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Empresa:</label>
+		<div class="col-xs-3 col-sm-auto">
+      <input id="filterPost" class="form-control" name="filterPost" tyle="margin-left: 10px;" type="text" [(ngModel)]="filterPost" 
+      (keyup)="onSearch( filterPost )"
+      />
+		</div>
+	</div>
+</div>
+
+</div>
+
+<div class="container mt-3">
+  <div class="row table-responsive">
+    <table class="table table-bordered">
+      <thead class="border text-center">
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Ubicación</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Email</th> 
+        <th scope="col">Acciones</th>       
+      </thead>
+      <tbody class="text-center">
+        <tr *ngFor="let e of enterprises | slice:desde:hasta">
+          <th class="text-minimo">{{ e.id }}</th>
+          <td >{{ e.name }} </td>
+          <td class="text-min">{{ e.calle }} {{ e.numero }} {{ e.colonia }} {{ e.ciudad }} {{ e.estado }}</td>
+          <td >{{ e.phone }}</td>
+          <td class="text-min">{{ e.email }}</td>
+          <td>
+            <button type="button" (click)="empleadosEmpresa(e.id)" class="btn btn-light text-dark border rounded-pill" 
+              style="--bs-btn-padding-y: .28rem; --bs-btn-padding-x: .5rem; 
+              --bs-btn-font-size: .75rem;margin-right: 10px;">
+              Ver empleados
+            </button>
+            <button type="button" class="btn btn-danger rounded-pill"  
+              (click)="openModal(e.id)"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; 
+              --bs-btn-font-size: .75rem;margin-right: 10px;">
+              Deshabilitar
+            </button>
+        </tr>
+      </tbody>
+      <mat-paginator [length]="enterprises.length"
+      [pageSize]="pageSize"
+      (page)="cambiarPagina($event)"
+      [hidePageSize]="true"
+      >
+      </mat-paginator>  
+    </table>
+  </div>
+</div>

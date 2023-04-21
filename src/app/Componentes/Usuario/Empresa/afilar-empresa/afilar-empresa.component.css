@@ -1,0 +1,11 @@
+.imagen {
+
+    background: #fff url(../../../../../assets/Iconos/lineal3.png)  repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+    

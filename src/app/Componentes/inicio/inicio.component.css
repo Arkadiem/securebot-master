@@ -1,0 +1,50 @@
+@media (max-width: 414px) {
+  iframe {
+  max-width: 100%;
+  height: auto;
+  }
+  }
+.container-fluid{
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+.margen-imagen{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+
+.contenedor-video{
+  background-color: #f7f7f7;
+}
+
+.texto-uno{
+  font-size: 50px;  
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  margin-bottom: -20px;
+  
+}
+
+.texto-dos{
+  font-size: 40px;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  
+  margin-bottom: 20px;
+
+}
+
+.texto-tres{
+  font-size: 30px;
+  font-family:  'Segoe UI', Roboto;
+  margin-bottom: 10px;
+}
+.imagen{
+  background-color: #ffffff;
+opacity: 0.8;
+background-image: radial-gradient( ellipse farthest-corner at 29px 29px , #f74545, #f74545 50%, #ffffff 50%);
+background-size: 29px 29px;
+}
+
+
+
+
+

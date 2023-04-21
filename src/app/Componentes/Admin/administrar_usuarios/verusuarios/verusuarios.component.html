@@ -1,0 +1,92 @@
+<br><div class="container">
+<h2 class="text-center">Administrar usuarios</h2>
+<div class="row mt-2">
+  <div class="col-lg-4 col-12  mt-2 text-center">
+    <div class="d-flex d-md-flex justify-content-md-center align-items-center">
+  <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Usuario:&nbsp;&nbsp;</label>
+  <div class="col-3 col-sm-auto">
+    <input id="filterPost" class="form-control" name="filterPost" tyle="margin-left: 10px;" type="text" [(ngModel)]="filterPost" 
+    (keyup)="onSearch( filterPost )"
+    />
+  </div>
+    </div>
+</div>
+<div class="col-lg-4 col-12 mt-2 text-center">
+  <div class="btn-group "  role="group" aria-label="Basic example">
+    <button type="button" class="btn" [ngClass]="{'btn-light border': selectedRole !== 1, 'btn-dark': selectedRole === 1}"  style="margin-left: 30px;" (click)="rolCheck(1)">Admin</button>
+    <button type="button" class="btn" [ngClass]="{'btn-light border': selectedRole !== 2, 'btn-dark': selectedRole === 2}" (click)="rolCheck(2)">Dueño</button>
+    <button type="button" class="btn" [ngClass]="{'btn-light border': selectedRole !== 3, 'btn-dark': selectedRole === 3}"(click)="rolCheck(3)">Encargado</button>
+    <button type="button" class="btn" [ngClass]="{'btn-light border': selectedRole !== 4, 'btn-dark': selectedRole === 4}" (click)="rolCheck(4)">Empleado</button>
+  </div>
+</div>
+<div class="col-lg-4 col-12 mt-2 ">
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <div class="form-check form-switch custom-switch-lg shadow-none">
+    <input class="form-check-input shadow-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked (click)="status()">
+    <label class="form-check-label "style="margin-left: 20px;font-size:19px" for="flexSwitchCheckChecked">Activos</label>
+  </div>
+</div>
+</div>
+</div>
+<br>
+<div *ngIf="(users).length === 0 || users === undefined" [@fadeInOut]>
+  <p>No se encontraron datos</p>
+</div>
+  <div class="row table-responsive mt-2">
+    <table class="table table-bordered">
+      <thead class="border text-center">
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Email</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Rol</th> 
+        <th scope="col">Estatus</th>
+        <th scope="col">Acciones</th>       
+      </thead>
+      <tbody class="text-center">
+        <tr *ngFor="let u of users | slice:desde:hasta">
+          <th scope="row">{{ u.id }}</th>
+          <td>{{ u.name }} {{ u.ap_paterno }} {{ u.ap_materno }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.phone_number }}</td>
+          <td>{{ u.rol }}</td>
+          <td>
+            <span *ngIf="u.active == 1">Activo</span>
+            <span *ngIf="u.active == 0">Inactivo</span>
+          </td>
+          <td>
+            <button type="button" class="btn btn-light text-dark border" 
+            (click)="openRoleModal(u.id)" 
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; 
+            --bs-btn-font-size: .75rem;margin-right: 10px;">
+            Cambiar rol
+            </button>
+            <button type="button" class="btn btn-dark" 
+            (click)="openStatusModal(u.id)" 
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; 
+            --bs-btn-font-size: .75rem;margin-right: 10px;">
+            Cambiar estatus
+            </button>
+         </td>
+        </tr>
+      </tbody>  
+      <br>
+      <!-- <button [disabled]="page === 0" type="button" class="btn btn-dark" (click)="previousPage()"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; 
+        --bs-btn-font-size: .75rem;margin-right: 10px;">
+        Anterior
+      </button>
+      <button type="button" class="btn btn-dark" (click)="nextPage()"
+      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; 
+      --bs-btn-font-size: .75rem;margin-right: 10px;">
+      Siguiente
+      </button> -->
+      <mat-paginator [length]="users.length"
+        [pageSize]="pageSize"
+        (page)="cambiarPagina($event)"
+        [hidePageSize]="true"
+        >
+      </mat-paginator>
+    </table>
+  </div>
+</div> 

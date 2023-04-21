@@ -1,0 +1,31 @@
+.card {
+    width: 480px;
+    padding: 10px;
+    border-radius: 20px;
+    background: #ffffff;
+    
+    backdrop-filter: blur(2px);
+    border: 1.5px solid #fcfcfc;
+    height: auto;
+    position: relative;
+  }
+  
+  .container {
+    height: 100vh;
+  }
+  
+  .imagen {
+  background: #ffffffc9 url(../../../../assets/Iconos/formas_3.png)  repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .text_tittle{
+    font-size:  40px;
+    font-weight: bold;
+    color: #000000;
+
+  }

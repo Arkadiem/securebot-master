@@ -1,0 +1,112 @@
+<div class="container-fluid ">
+  <div class="row">
+    <div class=" col-12 col-sm-12 col-md-12 col-lg-3 col-xs-12">  
+      <ul class="nav flex-column">
+        
+        <li class="nav-item border-end  border-bottom p-3 nav-item-spaced">
+          <a class="nav-link btn" (click)="verEmpleados()" *ngIf="iAdmin || iOwner">Empleados</a>
+        </li>
+        <li class="nav-item border-end  border-bottom p-3 nav-item-spaced">
+          <a class="nav-link btn" (click)="empresaOpciones()">Empresa</a>
+        </li>
+        <li class="nav-item border-end  border-bottom p-3 nav-item-spaced">
+          <a class="nav-link btn" (click)="carrosEmpresa()">Carritos</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xs-12">
+      <div class="container">    
+        <div class="row">
+          <div class="col-12">
+            <div class="card">    
+              <div class="container mt-3">
+                <ngb-toast *ngIf="show" [autohide]="true" [delay]="7000" (hidden)="show=false">
+                  <ng-template ngbToastHeader>
+                    <div class="me-auto">
+                      <strong class="mx-1">Ayuda</strong>
+                    </div>
+                  </ng-template>
+                  <p class="text-center">
+                    Recuerda que "Cambiar puesto" alterna entre encargado, el cual puede agregar carritos de seguridad y empleado, el cual sólo puede ver los datos de los sensores.
+                  </p>
+                  
+                </ngb-toast>
+                <div class="row">
+                  <div class="col-4">
+                  </div>
+                  <div class="col-4">
+                    <h2 class="text-center">Tus empleados</h2>
+                  </div>
+                  <div class="col-4 d-grid gap-2 d-md-flex  justify-content-md-end">
+                    <button type="button" (click)="verSolicitudes()" class="btn btn-light position-relative" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .95rem;display: flex; flex-direction: column; justify-content: center;"> 
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" style="margin-left: 20px;" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                      </svg>
+                      Solicitudes
+                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="count > 0">
+                        {{ count }}
+                      </span>
+                      <span class="sinsolicitudes"*ngIf="count == 0" ></span>
+                    </button>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Empleado:</label>
+                    <div class="col-xs-3 col-sm-auto">
+                      <input id="filterPost" class="form-control" name="filterPost" tyle="margin-left: 10px;" type="text" [(ngModel)]="filterPost" 
+                      (keyup)="onSearch( filterPost )"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>  
+              <br>
+              <div class="container">
+                <div class="row table-responsive">
+                  <table class="table table-bordered">
+                    <thead class="border text-center">
+                      <th scope="col">ID</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Teléfono</th>
+                      <th scope="col">Rol</th>
+                      <th scope="col">Acciones</th>       
+                    </thead>
+                    <tbody class="text-center">
+                      <tr *ngFor="let e of employees | slice:desde:hasta">
+                          <th>{{ e.id }}</th>
+                          <td>{{ e.name }} {{ e.ap_paterno }} {{ e.ap_materno }}</td>
+                          <td>{{ e.email }}</td>
+                          <td>{{ e.phone_number }}</td>
+                          <td>{{ e.rol }}</td> 
+                          <td>
+                            <button type="button" class="btn btn-light text-dark border rounded-pill" 
+                               (click)="changePuesto(e.id)"
+                              *ngIf="e.rol_id == 3 || e.rol_id == 4"
+                              style="--bs-btn-padding-y: .28rem; --bs-btn-padding-x: .5rem; 
+                              --bs-btn-font-size: .75rem;margin-right: 10px;">
+                            Cambiar puesto
+                            </button>
+                            <button type="button" class="btn btn-danger rounded-pill" 
+                              (click)="openModal(e.id)"
+                              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; 
+                              --bs-btn-font-size: .75rem;margin-right: 10px;">
+                             Eliminar
+                            </button>
+                          </tr>
+                        </tbody>  
+                        <mat-paginator [length]="employees.length"
+                        [pageSize]="pageSize"
+                        (page)="cambiarPagina($event)"
+                        [hidePageSize]="true"
+                        >
+                        </mat-paginator>  
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>                            
+            </div>
+          </div>
+        </div>
+      </div>
+  

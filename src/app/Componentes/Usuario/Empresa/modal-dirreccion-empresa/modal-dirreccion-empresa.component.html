@@ -1,0 +1,73 @@
+<div class="card" style="width: 28rem;" align="center">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="text-start">Cambiar dirección</h4>  
+    <button type="button" class="btn-close shadow-none" (click)="close()"></button>
+  </div>
+  <div class="card-body"> 
+    <form [formGroup]="addressEnterpriseForm" (ngSubmit)="addressEnterpriseForm.value">
+      <div class="row">
+        <span class="mobile-text mt-2 text-center">Para cambiar la dirrección, llena los siguientes campos.</span><br><br>
+          <div class="col-7 mt-2">
+            <div class="form-group">
+              <label for="calle">Calle</label>
+              <input type="text" formControlName="calle" class="form-control" placeholder="Ingresa el nombre de la calle" pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$" maxlength="40">  
+              <div *ngIf="addressEnterpriseForm.get('calle')?.invalid && (addressEnterpriseForm.get('calle')?.touched || addressEnterpriseForm.get('calle')?.dirty)" class="alert border text-danger border-bottom border-danger mt-1" role="alert">
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('calle')?.errors?.['required']">El campo calle es obligatorio.</span>
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('calle')?.errors?.['minlength']">El campo calle debe tener un mínimo de 3 caracteres.<br></span>
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('calle')?.errors?.['pattern']">El campo nombre no acepta números ni caracteres especiales.</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-5 mt-2">
+            <div class="form-group">
+              <label for="numero">Número</label>
+              <input type="text" formControlName="numero" class="form-control" placeholder="Ingresa el número" maxlength="5">
+              <div *ngIf="addressEnterpriseForm.get('numero')?.invalid && (addressEnterpriseForm.get('numero')?.touched || addressEnterpriseForm.get('numero')?.dirty)" class="alert border text-danger border-bottom border-danger mt-1" role="alert">
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('numero')?.errors?.['required']">El campo número es obligatorio.<br></span>
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('numero')?.errors?.['pattern']">El campo número solo acepta números.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-7">
+            <div class="form-group">
+              <label for="colonia">Colonia</label>
+              <input type="text" formControlName="colonia" class="form-control" placeholder="Ingresa el nombre de la colonia" pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$" maxlength="40">   
+              <div *ngIf="addressEnterpriseForm.get('colonia')?.invalid && (addressEnterpriseForm.get('colonia')?.touched || addressEnterpriseForm.get('colonia')?.dirty)" class="alert border text-danger border-bottom border-danger mt-1" role="alert">
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('colonia')?.errors?.['required']">El campo calle es obligatorio.</span>
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('colonia')?.errors?.['minlength']">El campo calle debe tener un mínimo de 3 caracteres.<br></span>
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('colonia')?.errors?.['pattern']">El campo nombre no acepta números ni caracteres especiales.</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="form-group">
+              <label for="cp">Código postal</label>
+              <input type="text" formControlName="cp" class="form-control" placeholder="Ingresa el código postal" maxlength="5">   
+              <div *ngIf="addressEnterpriseForm.get('cp')?.invalid && (addressEnterpriseForm.get('cp')?.touched || addressEnterpriseForm.get('cp')?.dirty)" class="alert border text-danger border-bottom border-danger mt-1" role="alert">
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('cp')?.errors?.['required']">El campo número es obligatorio.<br></span>
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('cp')?.errors?.['minlength']">El campo calle debe tener un mínimo de 5 caracteres.<br></span>
+                <span class="error-message" *ngIf="addressEnterpriseForm.get('cp')?.errors?.['pattern']">El campo número solo acepta números.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>  
+    </div>
+    <div class="card-footer text-end text-body-secondary">
+      <button type="button" class="btn btn-danger"
+        (click)="onSubmit(addressEnterpriseForm.value)"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; 
+        --bs-btn-font-size: .75rem;margin-right: 10px;">
+        Cambiar
+      </button>
+      <button type="button" class="btn btn-dark" 
+         (click)="close()" 
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; 
+        --bs-btn-font-size: .75rem;margin-right: 10px;">
+        Cancelar
+      </button>       
+    </div>
+  </div>
+    

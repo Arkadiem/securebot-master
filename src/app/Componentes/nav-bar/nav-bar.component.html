@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top bg-light border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../.../../../../assets/icon_sintxt.svg" alt="Bootstrap" width="80" height="30">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+        <li class="nav-item">
+          <a class="nav-link" (click)="InicioComponent()">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="TiposcarrosComponent()">Conócenos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="userLoggedIn" (click)="empresaOpciones()">Mi empresa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="userLoggedIn" (click)="perfilUsuario()">Mi perfil</a>
+        </li>
+        
+        <div *ngIf="iAdmin" class="row">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <a  class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                Administrador
+              </a>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <a ngbDropdownItem class="nav-link" *ngIf="iAdmin" (click)="VerUsuarios()">Usuarios</a>
+                <a ngbDropdownItem class="nav-link" *ngIf="iAdmin" (click)="verEmpresas()">Empresas</a>                
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </ul>
+      <span class="navbar-text">
+        <button class="button-39" *ngIf="!userLoggedIn" (click)="IniciosesionComponent()" role="button">Iniciar sesión</button>
+        <button class="button-39" *ngIf="userLoggedIn" (click)="logout()" role="button">Salir</button>
+      </span>
+    </div>
+  </div>
+</nav>

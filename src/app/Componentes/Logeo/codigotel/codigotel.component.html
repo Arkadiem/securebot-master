@@ -1,0 +1,38 @@
+<div class="vh-100 w-100 imagen">
+  <div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+      <h5 class="m-0">Código de verificación</h5>
+        <span class="mobile-text mt-2 text-center">Por favor, introduce el código de verificación que fue enviado al teléfono que proporcionaste. </span><br>
+          <span class="mobile-text">Ingresa tu código:</span>
+          <form [formGroup]="codeForm" (ngSubmit)="onSubmit(codeForm.value)">
+            <div class="d-flex flex-row mt-3">
+              <input type="text" formControlName="codigo1" class="form-control" autofocus="" maxlength="1" pattern="^[0-9]$" required>
+              <input type="text" formControlName="codigo2" class="form-control" maxlength="1" pattern="^[0-9]$" required>
+              <input type="text" formControlName="codigo3" class="form-control" maxlength="1" pattern="^[0-9]$" required>
+              <input type="text" formControlName="codigo4" class="form-control" maxlength="1" pattern="^[0-9]$" required>
+            </div>
+            <br>
+            <div *ngIf="(codeForm.get('codigo1')?.invalid && (codeForm.get('codigo1')?.touched || codeForm.get('codigo1')?.dirty)) || (codeForm.get('codigo2')?.invalid && (codeForm.get('codigo2')?.touched || codeForm.get('codigo2')?.dirty)) || (codeForm.get('codigo3')?.invalid && (codeForm.get('codigo3')?.touched || codeForm.get('codigo3')?.dirty)) || (codeForm.get('codigo4')?.invalid && (codeForm.get('codigo4')?.touched || codeForm.get('codigo4')?.dirty))" class="alert border text-danger border-bottom border-danger" role="alert">
+              <div *ngIf="codeForm.get('codigo1')?.errors?.['required'] || codeForm.get('codigo2')?.errors?.['required'] || codeForm.get('codigo3')?.errors?.['required'] || codeForm.get('codigo4')?.errors?.['required']" class="error-message" >
+                El código es obligatorio.
+              </div>
+              <div *ngIf="codeForm.get('codigo1')?.errors?.['pattern'] || codeForm.get('codigo2')?.errors?.['pattern'] || codeForm.get('codigo3')?.errors?.['pattern'] || codeForm.get('codigo4')?.errors?.['pattern']" class="error-message" >
+                El código solo puede contener números.
+              </div>
+            </div>
+            <div class="text-center mt-3">
+              <button class="button-39" type="submit" [disabled]="!codeForm.valid">Verificar cuenta</button>
+            </div>
+          </form>
+          <div class="text-center mt-3"><span class="d-block mobile-text"> ¿No has recibido tu código?</span><span class="fw-bold text-danger cursor" (click)="reenviarCodigo()">Reenviar</span></div>
+          <p class="mt-3 text-center">¿Te has equivocado de teléfono? <br><a (click)="telEquivocado()" class="fw-bold text-danger cursor">Aún puedes cambiarlo</a></p>
+
+        </div>
+        <div *ngIf="errorMessage" style="position: fixed; top: 10px; right: 10px;">
+          <ngb-toast *ngIf="show" class="fondotoast" [autohide]="true" [delay]="4000" (hidden)="show=false">
+            {{ errorMessage }}
+          </ngb-toast>
+        </div>
+  </div>
+</div>
+    

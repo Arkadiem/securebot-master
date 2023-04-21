@@ -1,0 +1,32 @@
+
+.text2 {
+    color: #000000
+}
+.text1 {
+    font-size: 14px;
+    font-weight: 600
+}
+.progress div {
+    background-color: rgb(255, 53, 53)
+}
+
+.progress {
+    height: 10px;
+    border-radius: 10px
+}
+.badge span {
+    background-color: #f0f0f0;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    font-size: 18px;
+    display: flex;
+    color: #000000;
+    justify-content: center;
+    align-items: center
+}
+.c-details span {
+    font-weight: 300;
+    font-size: 16px
+}
